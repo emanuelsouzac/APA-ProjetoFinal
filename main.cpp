@@ -1,74 +1,104 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include "valores.h"
 
 using namespace std;
 
+
 int main() {
-    string arquivo;
-    cout << "Nome do arquivo: ";
-    cin >> arquivo;
 
-    ifstream arquivoEntrada("instancias/" + arquivo + ".txt");
+    //MeuArquivo minhaInstancia(arquivo);
+    //minhaInstancia.imprimirValores();
+    
 
-    if (!arquivoEntrada.is_open()) {
-        cerr << "Erro ao abrir o arquivo." << endl;
-        return 1;
-    }
 
-    int n, k, Q, L, r;
+    string arquivo = "n9k5_A";
+    //cout << "Nome do arquivo: ";
+    //cin >> arquivo;
 
-    // Lê os valores de n, k, Q, L e r a partir do arquivo
-    arquivoEntrada >> n >> k >> Q >> L >> r;
+    MeuArquivo valores(arquivo);
 
-    // Lê os valores do array d
-    vector<int> d(n);
-    for (int i = 0; i < n; i++) {
-        arquivoEntrada >> d[i];
-    }
 
-    // Lê os valores do array p
-    vector<int> p(n);
-    for (int i = 0; i < n; i++) {
-        arquivoEntrada >> p[i];
-    }
+    vector<bool> clienteAtendido(valores.n, false);
+    vector<int> veiculo(valores.k, valores.Q);
+    int contVeiculo = 0;
+    int contClientes = 0;
 
-    // Lê a matriz c
-    vector<vector<int>> c(n+1, vector<int>(n+1));
-    for (int i = 0; i < n+1; i++) {
-        for (int j = 0; j < n+1; j++) {
-            arquivoEntrada >> c[i][j];
+    vector<vector<int>> rotas(valores.k);
+
+    int custoRota = 0;
+    int custoTerceirizacao = 0;
+
+    int referencial = 0;
+    int menor;
+    int pos;
+
+    while (1)
+    {
+        menor = 100000000;
+        for (int i = 0; i < valores.n + 1; i++)
+        {
+            if (i != referencial && i != 0 && clienteAtendido[i-1] == false && valores.c[referencial][i] < menor)
+            {
+                menor = valores.c[referencial][i];
+                pos = i;
+            }
+        }
+        if (veiculo[contVeiculo] - valores.d[pos - 1] < 0)
+        {
+            contVeiculo++;
+            custoRota += valores.c[referencial][0];
+            if (contClientes > valores.L)
+            {
+                break;
+            }
+            referencial = 0;
+        }
+        else
+        {
+            clienteAtendido[pos-1] = true;
+            custoRota += valores.c[referencial][pos];
+            veiculo[contVeiculo] -= valores.d[pos - 1];
+            contClientes++;
+            referencial = pos;
+            rotas[contVeiculo].push_back(pos);
         }
     }
 
-    arquivoEntrada.close();
-
-    // Agora, você pode imprimir os valores lidos ou realizar outras operações com eles
-    cout << "n: " << n << endl;
-    cout << "k: " << k << endl;
-    cout << "Q: " << Q << endl;
-    cout << "L: " << L << endl;
-    cout << "r: " << r << endl;
-
-    cout << "Array d:" << endl;
-    for (int i = 0; i < n; i++) {
-        cout << d[i] << " ";
-    }
-    cout << endl;
-
-    cout << "Array p:" << endl;
-    for (int i = 0; i < n; i++) {
-        cout << p[i] << " ";
-    }
-    cout << endl;
-
-    cout << "Matriz c:" << endl;
-    for (int i = 0; i < n+1; i++) {
-        for (int j = 0; j < n+1; j++) {
-            cout << c[i][j] << " ";
+    for (int i = 0; i < valores.n; i++)
+    {
+        if (clienteAtendido[i] == false)
+        {
+            custoTerceirizacao += valores.p[i];
         }
-        cout << endl;
     }
+
+    cout << endl << "Resultado guloso" << endl << endl;
+
+    cout << "Valor total da solucao: " << custoRota + custoTerceirizacao + contVeiculo * valores.r << endl;
+    cout << "Custo de roteamento: " << custoRota << endl;
+    cout << "Custo associado a utilizacao dos veiculos: " << contVeiculo  * valores.r << endl;
+    cout << "Custo de terceirizacao: " << custoTerceirizacao << endl;
+    cout << endl << "Lista de clientes terceirizados: ";
+    for (int i = 0; i < valores.n; i++)
+    {
+        if (clienteAtendido[i] == false)
+        {
+            cout << i + 1 << " ";
+        }
+    }
+    cout << endl << endl << "Numero de rotas: " << contVeiculo << endl;
+    for (int i = 0; i < valores.k; i++) {
+        if(!rotas[i].empty()){
+            cout << "Rota " << i + 1 << ": ";
+            for (int elemento : rotas[i]) {
+                cout << elemento << ' ';
+            }
+            cout << endl;
+        }
+    }
+
 
     return 0;
 }
