@@ -3,16 +3,12 @@
 #define NUM 1000000;
 
 Guloso::Guloso() {
-    // Inicialize os membros privados, se houver algum
 }
 
 Guloso::~Guloso() {
-    // Destrutor vazio
 }
 
-void Guloso::algoritmoGuloso(MeuArquivo valores) {
-    
-    Resultados resultados(valores);
+void Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
 
     int referencial = 0;
     int menor;

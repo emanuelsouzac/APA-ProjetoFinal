@@ -11,10 +11,10 @@ using namespace std;
 
 class Guloso {
 public:
-    Guloso(); // Construtor
-    ~Guloso(); // Destrutor
+    Guloso();
+    ~Guloso();
 
-    void algoritmoGuloso(MeuArquivo valores); // Função para executar o algoritmo guloso
+    void algoritmoGuloso(MeuArquivo valores, Resultados resultados);
 
 };
 
