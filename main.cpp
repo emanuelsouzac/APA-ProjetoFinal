@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 int main() {   
 
     string instancia;
@@ -23,12 +22,12 @@ int main() {
     VND vnd;
 
     cout << endl << "Resultado guloso para a instancia " << instancia << endl << endl;
-    guloso.algoritmoGuloso(valores, resultados);
+    resultados = guloso.algoritmoGuloso(valores, resultados);
+    resultados.mostraResultados(valores);
 
-    cout << endl << "Teste : " << resultados.custoRota << endl;
-
-    cout << endl << "Resultado do VND para a instancia " << instancia << endl << endl;
-    vnd.algoritmoVND(resultados);
+    cout << endl << "Resultado VND para a instancia " << instancia << endl << endl;
+    resultados = vnd.algoritmoVND(valores, resultados);
+    resultados.mostraResultados(valores);
 
     return 0;
 }

@@ -4,13 +4,15 @@
 #include <vector>
 
 #include "resultados.h"
+#include "valores.h"
 
 class VND {
 public:
-    VND(); // Construtor
-    ~VND(); // Destrutor
+    VND();
+    ~VND();
 
-    void algoritmoVND(Resultados resultados);
+    Resultados algoritmoVND(MeuArquivo valores, Resultados resultados);
+    Resultados crossExchange(MeuArquivo valores, Resultados resultadosCopia);
 };
 
 #endif // VND_H

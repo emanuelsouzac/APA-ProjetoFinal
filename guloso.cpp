@@ -8,7 +8,7 @@ Guloso::Guloso() {
 Guloso::~Guloso() {
 }
 
-void Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
+Resultados Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
 
     int referencial = 0;
     int menor;
@@ -58,33 +58,7 @@ void Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
 
     resultados.custoVeiculos = resultados.contVeiculo * valores.r;
 
-    cout << "Valor total da solucao: " << resultados.custoRota + resultados.custoTerceirizacao + resultados.custoVeiculos << endl;
-    cout << "Custo de roteamento: " << resultados.custoRota << endl;
-    cout << "Custo associado a utilizacao dos veiculos: " << resultados.custoVeiculos << endl;
-    cout << "Custo de terceirizacao: " << resultados.custoTerceirizacao << endl;
-    cout << endl << "Lista de clientes terceirizados: ";
+    resultados.custoTotal = resultados.custoRota + resultados.custoTerceirizacao + resultados.custoVeiculos;
 
-    //for (int i = 0; i < valores.n; i++)
-    //{
-    //    if (clienteAtendido[i] == false)
-    //    {
-    //        cout << i + 1 << " ";
-    //    }
-    //}
-    
-    cout << endl;
-    for (int elemento : resultados.terceirizados) {
-        cout << elemento + 1 << ' ';
-    }
-
-    cout << endl << endl << "Numero de rotas: " << resultados.contVeiculo << endl;
-    for (int i = 0; i < valores.k; i++) {
-        if(!resultados.rotas[i].empty()){
-            cout << "Rota " << i + 1 << ": ";
-            for (int elemento : resultados.rotas[i]) {
-                cout << elemento << ' ';
-            }
-            cout << endl;
-        }
-    }
+    return resultados;
 }

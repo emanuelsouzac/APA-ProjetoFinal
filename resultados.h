@@ -13,6 +13,9 @@ public:
     Resultados(MeuArquivo valores);
     ~Resultados();
 
+    void mostraResultados(MeuArquivo valores);
+
+    int custoTotal;
     int custoRota;
     int custoVeiculos;
     int custoTerceirizacao;
