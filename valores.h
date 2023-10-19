@@ -1,5 +1,5 @@
-#ifndef MINHACLASSE_H
-#define MINHACLASSE_H
+#ifndef MEUARQUIVO_H
+#define MEUARQUIVO_H
 
 #include <iostream>
 #include <fstream>
@@ -7,8 +7,7 @@
 
 class MeuArquivo {
 public:
-    MeuArquivo(const std::string& arquivo);
-    void imprimirValores() const;
+    MeuArquivo(const std::string& instancia);
 
     int n, k, Q, L, r;
     std::vector<int> d, p;
