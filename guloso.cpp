@@ -14,16 +14,10 @@ void Guloso::algoritmoGuloso(MeuArquivo valores) {
     
     Resultados resultados(valores);
 
-    vector<bool> clienteAtendido(valores.n, false);
-    vector<int> veiculo(valores.k, valores.Q);
-    int contVeiculo = 0;
-    int contClientes = 0;
-
-    vector<vector<int>> rotas(valores.k);
-
     int referencial = 0;
     int menor;
     int pos;
+    vector<bool> clienteAtendido(valores.n, false);
 
     while (1)
     {
@@ -36,11 +30,11 @@ void Guloso::algoritmoGuloso(MeuArquivo valores) {
                 pos = i;
             }
         }
-        if (veiculo[contVeiculo] - menor < 0)
+        if (resultados.veiculo[resultados.contVeiculo] - menor < 0)
         {
-            contVeiculo++;
+            resultados.contVeiculo++;
             resultados.custoRota += valores.c[referencial][0];
-            if (contClientes > valores.L)
+            if (resultados.contClientes > valores.L)
             {
                 break;
             }
@@ -50,10 +44,10 @@ void Guloso::algoritmoGuloso(MeuArquivo valores) {
         {
             clienteAtendido[pos] = true;
             resultados.custoRota += valores.c[referencial][pos + 1];
-            veiculo[contVeiculo] -= menor;
-            contClientes++;
-            referencial = pos;
-            rotas[contVeiculo].push_back(pos + 1);
+            resultados.veiculo[resultados.contVeiculo] -= menor;
+            resultados.contClientes++;
+            referencial = pos + 1;
+            resultados.rotas[resultados.contVeiculo].push_back(pos + 1);
         }
     }
 
@@ -66,7 +60,7 @@ void Guloso::algoritmoGuloso(MeuArquivo valores) {
         }
     }
 
-    resultados.custoVeiculos = contVeiculo * valores.r;
+    resultados.custoVeiculos = resultados.contVeiculo * valores.r;
 
     cout << "Valor total da solucao: " << resultados.custoRota + resultados.custoTerceirizacao + resultados.custoVeiculos << endl;
     cout << "Custo de roteamento: " << resultados.custoRota << endl;
@@ -87,11 +81,11 @@ void Guloso::algoritmoGuloso(MeuArquivo valores) {
         cout << elemento + 1 << ' ';
     }
 
-    cout << endl << endl << "Numero de rotas: " << contVeiculo << endl;
+    cout << endl << endl << "Numero de rotas: " << resultados.contVeiculo << endl;
     for (int i = 0; i < valores.k; i++) {
-        if(!rotas[i].empty()){
+        if(!resultados.rotas[i].empty()){
             cout << "Rota " << i + 1 << ": ";
-            for (int elemento : rotas[i]) {
+            for (int elemento : resultados.rotas[i]) {
                 cout << elemento << ' ';
             }
             cout << endl;

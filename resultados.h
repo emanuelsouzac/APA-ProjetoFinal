@@ -18,6 +18,11 @@ public:
     int custoTerceirizacao;
 
     vector<int> terceirizados;
+    vector<int> veiculo;
+    vector<vector<int>> rotas;
+
+    int contVeiculo;
+    int contClientes;
 };
 
 #endif // RESULTADOS_H

@@ -5,13 +5,15 @@
 #include <fstream>
 #include <vector>
 
+using namespace std;
+
 class MeuArquivo {
 public:
-    MeuArquivo(const std::string& instancia);
+    MeuArquivo(const string& instancia);
 
     int n, k, Q, L, r;
-    std::vector<int> d, p;
-    std::vector<std::vector<int>> c;
+    vector<int> d, p;
+    vector<vector<int>> c;
 };
 
 #endif // MINHACLASSE_H
