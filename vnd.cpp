@@ -14,14 +14,17 @@ Resultados VND::algoritmoVND(MeuArquivo valores, Resultados resultados){
     int r = 3;
     int k = 2;
     Resultados resultadosCopia = resultados;
-    while(k<=r){
+    // CORRIGIR DEPOIS: while(k<=r)
+    while(k<=2){
         switch (k)
         {
         case 1:
             /* code */
             break;
         case 2:
-            resultadosCopia = crossExchange(valores, resultadosCopia);
+            if(resultados.contVeiculo > 1){
+                resultadosCopia = crossExchange(valores, resultadosCopia);
+            }
             break;
         case 3:
             /* code */
@@ -29,7 +32,8 @@ Resultados VND::algoritmoVND(MeuArquivo valores, Resultados resultados){
         }
         if(resultadosCopia.custoTotal < resultados.custoTotal){
             resultados = resultadosCopia;
-            k = 1;
+            // CORRIGIR DEPOIS: k = 1
+            k = 2;
         }else{
             k++;
         }
