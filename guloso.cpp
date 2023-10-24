@@ -17,19 +17,20 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
 
     while (1)
     {
-        menor = NUM;
-        for (int i = 0; i < valores.n; i++)
+        menor = 100000000;
+        for (int i = 0; i < valores.n + 1; i++)
         {
-            if (clienteAtendido[i] == false && valores.d[i] < menor)
+            if (i != referencial && i != 0 && clienteAtendido[i-1] == false && valores.c[referencial][i] < menor)
             {
-                menor = valores.d[i];
+                menor = valores.c[referencial][i];
                 pos = i;
             }
         }
-        if (resultados.veiculo[resultados.contVeiculo] - menor < 0)
+        if (resultados.capacVeiculo[resultados.contVeiculo] - valores.d[pos - 1] < 0)
         {
-            resultados.contVeiculo++;
             resultados.custoRota += valores.c[referencial][0];
+            resultados.rota[resultados.contVeiculo].push_back(0);
+            resultados.contVeiculo++;
             if (resultados.contClientes > valores.L)
             {
                 break;
@@ -38,12 +39,13 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
         }
         else
         {
-            clienteAtendido[pos] = true;
-            resultados.custoRota += valores.c[referencial][pos + 1];
-            resultados.veiculo[resultados.contVeiculo] -= menor;
+            if (resultados.capacVeiculo[resultados.contVeiculo] == valores.Q) resultados.rota[resultados.contVeiculo].push_back(0);
+            clienteAtendido[pos-1] = true;
+            resultados.custoRota += valores.c[referencial][pos];
+            resultados.capacVeiculo[resultados.contVeiculo] -= valores.d[pos - 1];
             resultados.contClientes++;
-            referencial = pos + 1;
-            resultados.rotas[resultados.contVeiculo].push_back(pos + 1);
+            referencial = pos;
+            resultados.rota[resultados.contVeiculo].push_back(pos);
         }
     }
 

@@ -25,9 +25,9 @@ int main() {
     resultados = guloso.algoritmoGuloso(valores, resultados);
     resultados.mostraResultados(valores);
 
-    //cout << endl << "Resultado VND para a instancia " << instancia << endl << endl;
-    //resultados = vnd.algoritmoVND(valores, resultados);
-    //resultados.mostraResultados(valores);
+    cout << endl << "Resultado VND para a instancia " << instancia << endl << endl;
+    resultados = vnd.algoritmoVND(valores, resultados);
+    resultados.mostraResultados(valores);
 
     return 0;
 }

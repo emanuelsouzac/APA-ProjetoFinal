@@ -21,8 +21,8 @@ public:
     int custoTerceirizacao;
 
     vector<int> terceirizados;
-    vector<int> veiculo;
-    vector<vector<int>> rotas;
+    vector<int> capacVeiculo;
+    vector<vector<int>> rota;
 
     int contVeiculo;
     int contClientes;
