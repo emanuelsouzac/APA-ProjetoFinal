@@ -1,13 +1,14 @@
 #include "resultados.h"
 
-Resultados::Resultados(MeuArquivo valores) {
+Resultados::Resultados(MeuArquivo val) {
     custoTotal = 0;
-    custoRota = 0;
+    custoRoteamento = 0;
+    custoRota.resize(val.k, 0);
     custoVeiculos = 0;
     custoTerceirizacao = 0;
 
-    capacVeiculo.resize(valores.k, valores.Q);
-    rota.resize(valores.k);
+    capacVeiculo.resize(val.k, val.Q);
+    rota.resize(val.k);
 
     contVeiculo = 0;
     contClientes = 0;
@@ -17,9 +18,9 @@ Resultados::~Resultados() {
 
 }
 
-void Resultados::mostraResultados(MeuArquivo valores){
+void Resultados::mostraResultados(MeuArquivo val){
     cout << "Valor total da solucao: " << custoTotal << endl;
-    cout << "Custo de roteamento: " << custoRota << endl;
+    cout << "Custo de roteamento: " << custoRoteamento << endl;
     cout << "Custo associado a utilizacao dos veiculos: " << custoVeiculos << endl;
     cout << "Custo de terceirizacao: " << custoTerceirizacao << endl;
     cout << endl << "Lista de clientes terceirizados: ";
@@ -38,10 +39,16 @@ void Resultados::mostraResultados(MeuArquivo valores){
         cout << endl;
     }
 
-    cout << endl << endl << "Capacidade restante dos veiculos" << endl;
-    for (int i = 0; i < valores.k; i++) {
-        cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
-    }
+    // cout << endl << "Custo de cada rota" << endl;
+    // for (int i = 0; i < val.k; i++) {
+    //     cout << "Rota " << i + 1 << ": " << custoRota[i] << endl;
+    // }
+    // cout << endl;
 
-    cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << valores.L << endl;
+    // cout << endl << endl << "Capacidade restante dos veiculos" << endl;
+    // for (int i = 0; i < val.k; i++) {
+    //     cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
+    // }
+
+    // cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
 }

@@ -13,6 +13,7 @@ public:
 
     Resultados algoritmoVND(MeuArquivo valores, Resultados resultados);
     Resultados crossExchange(MeuArquivo valores, Resultados resultadosCopia);
+    Resultados swap(MeuArquivo valores, Resultados resultadosCopia);
 };
 
 #endif // VND_H

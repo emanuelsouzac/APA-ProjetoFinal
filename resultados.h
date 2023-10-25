@@ -16,7 +16,8 @@ public:
     void mostraResultados(MeuArquivo valores);
 
     int custoTotal;
-    int custoRota;
+    int custoRoteamento;
+    vector<int> custoRota;
     int custoVeiculos;
     int custoTerceirizacao;
 

@@ -8,59 +8,63 @@ Guloso::Guloso() {
 Guloso::~Guloso() {
 }
 
-Resultados Guloso::algoritmoGuloso(MeuArquivo valores, Resultados resultados) {
+Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
 
-    int referencial = 0;
+    int ref = 0;
     int menor;
     int pos;
-    vector<bool> clienteAtendido(valores.n, false);
+    vector<bool> clienteAtendido(val.n, false);
 
     while (1)
     {
         menor = 100000000;
-        for (int i = 0; i < valores.n + 1; i++)
+        for (int i = 0; i < val.n + 1; i++)
         {
-            if (i != referencial && i != 0 && clienteAtendido[i-1] == false && valores.c[referencial][i] < menor)
+            if (i != ref && i != 0 && clienteAtendido[i-1] == false && val.c[ref][i] < menor)
             {
-                menor = valores.c[referencial][i];
+                menor = val.c[ref][i];
                 pos = i;
             }
         }
-        if (resultados.capacVeiculo[resultados.contVeiculo] - valores.d[pos - 1] < 0)
+        if (res.capacVeiculo[res.contVeiculo] - val.d[pos - 1] < 0)
         {
-            resultados.custoRota += valores.c[referencial][0];
-            resultados.rota[resultados.contVeiculo].push_back(0);
-            resultados.contVeiculo++;
-            if (resultados.contClientes > valores.L)
+            res.custoRoteamento += val.c[ref][0]; // adiciona a volta para a garagem ao custo total
+            res.custoRota[res.contVeiculo] += val.c[ref][0]; // adiciona a volta para a garagem ao custo de cada rota
+            res.rota[res.contVeiculo].push_back(0);
+            res.contVeiculo++;
+            if (res.contClientes > val.L)
             {
                 break;
             }
-            referencial = 0;
+            ref = 0;
         }
         else
         {
-            if (resultados.capacVeiculo[resultados.contVeiculo] == valores.Q) resultados.rota[resultados.contVeiculo].push_back(0);
+            if (res.capacVeiculo[res.contVeiculo] == val.Q) res.rota[res.contVeiculo].push_back(0); // adiciona 0 à rota se ele acabou de começar
             clienteAtendido[pos-1] = true;
-            resultados.custoRota += valores.c[referencial][pos];
-            resultados.capacVeiculo[resultados.contVeiculo] -= valores.d[pos - 1];
-            resultados.contClientes++;
-            referencial = pos;
-            resultados.rota[resultados.contVeiculo].push_back(pos);
+
+            res.custoRoteamento += val.c[ref][pos]; // custo da rota total
+            res.custoRota[res.contVeiculo] += val.c[ref][pos]; // custo de cada rota
+
+            res.capacVeiculo[res.contVeiculo] -= val.d[pos - 1];
+            res.contClientes++;
+            ref = pos;
+            res.rota[res.contVeiculo].push_back(pos);
         }
     }
 
-    for (int i = 0; i < valores.n; i++)
+    for (int i = 0; i < val.n; i++)
     {
         if (clienteAtendido[i] == false)
         {
-            resultados.custoTerceirizacao += valores.p[i];
-            resultados.terceirizados.push_back(i);
+            res.custoTerceirizacao += val.p[i];
+            res.terceirizados.push_back(i);
         }
     }
 
-    resultados.custoVeiculos = resultados.contVeiculo * valores.r;
+    res.custoVeiculos = res.contVeiculo * val.r;
 
-    resultados.custoTotal = resultados.custoRota + resultados.custoTerceirizacao + resultados.custoVeiculos;
+    res.custoTotal = res.custoRoteamento + res.custoTerceirizacao + res.custoVeiculos;
 
-    return resultados;
+    return res;
 }
