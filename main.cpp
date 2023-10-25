@@ -21,11 +21,11 @@ int main() {
     Guloso guloso;
     VND vnd;
 
-    cout << endl << "Resultado guloso para a instancia " << instancia << endl << endl;
+    cout << endl << ">>>>>>>>>> Guloso - " << instancia << " <<<<<<<<<<" << endl << endl;
     resultados = guloso.algoritmoGuloso(valores, resultados);
     resultados.mostraResultados(valores);
 
-    cout << endl << "Resultado VND para a instancia " << instancia << endl << endl;
+    cout << endl << ">>>>>>>>>> VND - " << instancia << " <<<<<<<<<<" << endl << endl;
     resultados = vnd.algoritmoVND(valores, resultados);
     resultados.mostraResultados(valores);
 

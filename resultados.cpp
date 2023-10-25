@@ -45,10 +45,10 @@ void Resultados::mostraResultados(MeuArquivo val){
     // }
     // cout << endl;
 
-    // cout << endl << endl << "Capacidade restante dos veiculos" << endl;
-    // for (int i = 0; i < val.k; i++) {
-    //     cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
-    // }
+    cout << endl << endl << "Capacidade restante dos veiculos" << endl;
+    for (int i = 0; i < val.k; i++) {
+        cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
+    }
 
     // cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
 }
