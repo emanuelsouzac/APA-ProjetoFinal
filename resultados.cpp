@@ -25,7 +25,7 @@ void Resultados::mostraResultados(MeuArquivo val){
     cout << "Custo de terceirizacao: " << custoTerceirizacao << endl;
     cout << endl << "Lista de clientes terceirizados: ";
     
-    cout << endl;
+    // cout << endl;
     for (int elemento : terceirizados) {
         cout << elemento + 1 << ' ';
     }
