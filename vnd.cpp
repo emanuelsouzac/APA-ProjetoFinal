@@ -48,7 +48,7 @@ Resultados VND::swap(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        // cout << "Fez o swap" << endl;
+        cout << "Fez o swap entre o " << resCopia.rota[A][x] << " e o " << resCopia.rota[A][y] << endl;
         resCopia.custoRoteamento = melhorCusto;
         resCopia.custoTotal = resCopia.custoRoteamento + resCopia.custoTerceirizacao + resCopia.custoVeiculos;
         std::swap(resCopia.rota[A][x], resCopia.rota[A][y]);
@@ -88,7 +88,7 @@ Resultados VND::reInsertion(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        // cout << "Fez o reinsertion de " << resCopia.rota[A][x] << " na frente de " << resCopia.rota[A][y] << " e o custo ficou " << melhorCusto << endl;
+        cout << "Fez o reinsertion de " << resCopia.rota[A][x] << " na frente de " << resCopia.rota[A][y] << " e o custo ficou " << melhorCusto << endl;
         resCopia.custoRoteamento = melhorCusto;
         resCopia.custoTotal = resCopia.custoRoteamento + resCopia.custoTerceirizacao + resCopia.custoVeiculos;
         resCopia.rota[A].insert(resCopia.rota[A].begin() + y+1, resCopia.rota[A][x]);
