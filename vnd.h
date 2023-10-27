@@ -14,6 +14,7 @@ public:
     Resultados algoritmoVND(MeuArquivo valores, Resultados resultados);
     Resultados crossExchange(MeuArquivo valores, Resultados resultadosCopia);
     Resultados swap(MeuArquivo valores, Resultados resultadosCopia);
+    Resultados reInsertion(MeuArquivo val, Resultados resCopia);
     Resultados terceiriza(MeuArquivo valores, Resultados resultadosCopia);
     Resultados desterceiriza(MeuArquivo valores, Resultados resultadosCopia);
 };
