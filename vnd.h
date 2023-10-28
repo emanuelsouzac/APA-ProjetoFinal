@@ -17,6 +17,7 @@ public:
     Resultados reInsertion(MeuArquivo val, Resultados resCopia);
     Resultados terceiriza(MeuArquivo valores, Resultados resultadosCopia);
     Resultados desterceiriza(MeuArquivo valores, Resultados resultadosCopia);
+    Resultados terceirizaRota(MeuArquivo val, Resultados resCopia);
 };
 
 #endif // VND_H

@@ -32,7 +32,7 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
             res.custoRota[res.contVeiculo] += val.c[ref][0]; // adiciona a volta para a garagem ao custo de cada rota
             res.rota[res.contVeiculo].push_back(0);
             res.contVeiculo++;
-            if (res.contClientes > val.L)
+            if (res.contClientes >= val.L)
             {
                 break;
             }

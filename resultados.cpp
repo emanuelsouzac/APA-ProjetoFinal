@@ -50,5 +50,5 @@ void Resultados::mostraResultados(MeuArquivo val){
         cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
     }
 
-    // cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
+    cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
 }

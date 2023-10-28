@@ -7,7 +7,7 @@ VND::~VND() {
 }
 
 Resultados VND::swap(MeuArquivo val, Resultados resCopia){
-    cout << "Entrou no swap" << endl;
+    // cout << "Entrou no swap" << endl;
     bool trocaFeita = false;
     int melhorCusto = resCopia.custoRoteamento;
     int A, x, y;
@@ -47,7 +47,7 @@ Resultados VND::swap(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        cout << "Fez o swap entre o " << resCopia.rota[A][x] << " e o " << resCopia.rota[A][y] << endl;
+        // cout << "Fez o swap entre o " << resCopia.rota[A][x] << " e o " << resCopia.rota[A][y] << endl;
         resCopia.custoRoteamento = melhorCusto;
         resCopia.custoTotal = resCopia.custoRoteamento + resCopia.custoTerceirizacao + resCopia.custoVeiculos;
         std::swap(resCopia.rota[A][x], resCopia.rota[A][y]);
@@ -57,7 +57,7 @@ Resultados VND::swap(MeuArquivo val, Resultados resCopia){
 }
 
 Resultados VND::reInsertion(MeuArquivo val, Resultados resCopia){
-    cout << "Entrou no reInsertion" << endl;
+    // cout << "Entrou no reInsertion" << endl;
     bool trocaFeita = false;
     int melhorCusto = resCopia.custoRoteamento;
     int A, x, y;
@@ -87,7 +87,7 @@ Resultados VND::reInsertion(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        cout << "Fez o reinsertion de " << resCopia.rota[A][x] << " na frente de " << resCopia.rota[A][y] << " e o custo ficou " << melhorCusto << endl;
+        // cout << "Fez o reinsertion de " << resCopia.rota[A][x] << " na frente de " << resCopia.rota[A][y] << " e o custo ficou " << melhorCusto << endl;
         resCopia.custoRoteamento = melhorCusto;
         resCopia.custoTotal = resCopia.custoRoteamento + resCopia.custoTerceirizacao + resCopia.custoVeiculos;
         resCopia.rota[A].insert(resCopia.rota[A].begin() + y + 1, resCopia.rota[A][x]);
@@ -159,7 +159,7 @@ Resultados VND::crossExchange(MeuArquivo val, Resultados resCopia){
 }
 
 Resultados VND::terceiriza(MeuArquivo val, Resultados resCopia){
-    cout << "Entrou no terceiriza" << endl;
+    // cout << "Entrou no terceiriza" << endl;
     bool trocaFeita = false;
     int melhorCusto = resCopia.custoTotal;
     int A, x;
@@ -184,7 +184,7 @@ Resultados VND::terceiriza(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        cout << "Terceirizando o cliente " << resCopia.rota[A][x] << " da rota " << A + 1 << endl;
+        // cout << "Terceirizando o cliente " << resCopia.rota[A][x] << " da rota " << A + 1 << endl;
         resCopia.capacVeiculo[A] += val.d[resCopia.rota[A][x]-1]; // atualizar a capacidade do veiculo/rota
         resCopia.custoRoteamento = resCopia.custoRoteamento - val.c[resCopia.rota[A][x-1]][resCopia.rota[A][x]] - val.c[resCopia.rota[A][x]][resCopia.rota[A][x+1]] + val.c[resCopia.rota[A][x-1]][resCopia.rota[A][x+1]]; // atualizar o custo da rota
         resCopia.custoTerceirizacao += val.p[resCopia.rota[A][x]-1]; // atualizar o custo da terceirizacao
@@ -194,21 +194,18 @@ Resultados VND::terceiriza(MeuArquivo val, Resultados resCopia){
         resCopia.contClientes--;
         // cout << "Numero de itens na rota " << A << ": " << resCopia.rota[A].size() << endl;
         if(resCopia.rota[A].size() == 2){
-            cout << "!!!!!!!!!!!!!!!!! Uma rota ficou vazia !!!!!!!!!!!!!!!!!" << endl;
+            // cout << "!!!!!!!!!!!!!!!!! Uma rota ficou vazia !!!!!!!!!!!!!!!!!" << endl;
             if(A == resCopia.contVeiculo - 1){
                 resCopia.rota[A].clear();
                 resCopia.contVeiculo--;
             }else{
                 resCopia.contVeiculo--;
-                for(int i = 0; i < resCopia.contVeiculo; i++){
-                    for(int j = i; j < val.k ; j++){
-                        if(resCopia.rota[j].size() > 2){
-                            resCopia.rota[i] = resCopia.rota[j];
-                            break;
-                        }
-                    }
+                for(int i = A; i < resCopia.contVeiculo; i++){
+                    resCopia.rota[i] = resCopia.rota[i+1];
+                    resCopia.capacVeiculo[i] = resCopia.capacVeiculo[i+1];
                 }
                 resCopia.rota[resCopia.contVeiculo].clear();
+                resCopia.capacVeiculo[resCopia.contVeiculo] = val.Q;
             }
             resCopia.custoTotal -= val.r;
             resCopia.custoVeiculos -= val.r;
@@ -218,7 +215,7 @@ Resultados VND::terceiriza(MeuArquivo val, Resultados resCopia){
 }
 
 Resultados VND::desterceiriza(MeuArquivo val, Resultados resCopia){
-    cout << "Entrou no desterceiriza" << endl;
+    // cout << "Entrou no desterceiriza" << endl;
     bool trocaFeita = false;
     int melhorCusto = resCopia.custoTotal;
     int A, x, y;
@@ -233,7 +230,7 @@ Resultados VND::desterceiriza(MeuArquivo val, Resultados resCopia){
         }
         for(int rotaN = 0; rotaN <= parada; rotaN++){
             if(resCopia.capacVeiculo[rotaN] - val.d[resCopia.terceirizados[i] - 1] >= 0){
-                cout << resCopia.terceirizados[i] << " cabe na rota " << rotaN + 1 << endl;
+                // cout << resCopia.terceirizados[i] << " cabe na rota " << rotaN + 1 << endl;
                 int novoCusto;
                 if(resCopia.rota[rotaN].size()==0){
                     novoCusto = resCopia.custoTotal
@@ -267,9 +264,9 @@ Resultados VND::desterceiriza(MeuArquivo val, Resultados resCopia){
         }
     }
     if(trocaFeita == true){
-        cout << "Desterceirizou o " << resCopia.terceirizados[x] << " e colocou na rota " << A + 1 << endl;
+        // cout << "Desterceirizou o " << resCopia.terceirizados[x] << " e colocou na rota " << A + 1 << endl;
         if(resCopia.rota[A].size() == 0){
-            cout << "!!!!!!!!!!!!!!!!! Uma rota nova apareceu !!!!!!!!!!!!!!!!!" << endl;
+            // cout << "!!!!!!!!!!!!!!!!! Uma rota nova apareceu !!!!!!!!!!!!!!!!!" << endl;
             resCopia.rota[A] = {0, resCopia.terceirizados[x], 0};
             resCopia.custoRoteamento = resCopia.custoRoteamento
                                         + val.c[0][resCopia.terceirizados[x]]
@@ -292,37 +289,96 @@ Resultados VND::desterceiriza(MeuArquivo val, Resultados resCopia){
     return resCopia;
 }
 
+Resultados VND::terceirizaRota(MeuArquivo val, Resultados resCopia){
+    cout << "Entrou no terceirizaRota" << endl;
+    bool trocaFeita = false;
+    int melhorCusto = resCopia.custoTotal;
+    int A, custoDaRota, custoDeTerceirizar;
+    for(int rotaN = 0; rotaN < resCopia.contVeiculo; rotaN++){
+        if(resCopia.contClientes - (resCopia.rota[rotaN].size() - 2) >= val.L){
+            custoDaRota = 0, custoDeTerceirizar = 0;
+            // Calcula o custo da rota
+            for(int i = 0; i < resCopia.rota[rotaN].size() - 1; i++){
+                custoDaRota += val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][i+1]];
+            }
+            // Calcula o custo de terceirizar aquela rota
+            for(int i = 1; i < resCopia.rota[rotaN].size() - 1; i++){
+                custoDeTerceirizar += val.p[resCopia.rota[rotaN][i] - 1];
+            }
+            int novoCusto = resCopia.custoTotal - custoDaRota - val.r + custoDeTerceirizar;
+            if(novoCusto < melhorCusto){
+                melhorCusto = novoCusto;
+                A = rotaN;
+                trocaFeita = true;
+            }
+        }
+    }
+    if(trocaFeita == true){
+        cout << "FEZ A TERCEIRIZACAO DA ROTA " << A + 1 << endl;
+        // atualiza os valores dos custos
+        resCopia.custoRoteamento -= custoDaRota;
+        resCopia.custoTerceirizacao += custoDeTerceirizar;
+        resCopia.custoVeiculos -= val.r;
+        resCopia.custoTotal = resCopia.custoRoteamento + resCopia.custoTerceirizacao + resCopia.custoVeiculos;
+        // atualiza o contador de clientes
+        resCopia.contClientes -= (resCopia.rota[A].size() - 2);
+        // atualiza a lista de terceirizados
+        for(int i = 1; i < resCopia.rota[A].size() - 1; i++){
+            resCopia.terceirizados.push_back(resCopia.rota[A][i]);
+        }
+        // atualiza as rotas
+        if(A == resCopia.contVeiculo - 1){
+            resCopia.rota[A].clear();
+            resCopia.capacVeiculo[A] = val.Q;
+            resCopia.contVeiculo--;
+        }else{
+            resCopia.contVeiculo--;
+            for(int i = A; i < resCopia.contVeiculo; i++){
+                resCopia.rota[i] = resCopia.rota[i+1];
+                resCopia.capacVeiculo[i] = resCopia.capacVeiculo[i+1];
+            }
+            resCopia.rota[resCopia.contVeiculo].clear();
+            resCopia.capacVeiculo[resCopia.contVeiculo] = val.Q;
+        }
+    }
+    return resCopia;
+}
+
 Resultados VND::algoritmoVND(MeuArquivo val, Resultados res){
-    int r = 5;
+    int r = 6;
     int k = 1;
     Resultados resCopia = res; // Resultados &resCopia = res;
     while(k<=r){
         switch (k)
         {
         case 1:
-            resCopia = swap(val, resCopia);
+            // resCopia = swap(val, resCopia);
             break;
         case 2:
-            resCopia = reInsertion(val, resCopia);
+            // resCopia = reInsertion(val, resCopia);
             break;
         case 3:
-            // if(resCopia.contVeiculo > 1){resCopia = crossExchange(val, resCopia);}
+            if(resCopia.contVeiculo > 1){resCopia = crossExchange(val, resCopia);}
             break;
         case 4:
             // cout << resCopia.contClientes << " - " << val.L << endl;
-            if(resCopia.contClientes > val.L){resCopia = terceiriza(val, resCopia);}
+            // if(resCopia.contClientes > val.L){resCopia = terceirizaRota(val, resCopia);}
             break;
         case 5:
+            // cout << resCopia.contClientes << " - " << val.L << endl;
+            // if(resCopia.contClientes > val.L){resCopia = terceiriza(val, resCopia);}
+            break;
+        case 6:
             // cout << resCopia.contClientes << " - " << val.n << endl;
-            if(resCopia.contClientes < val.n){resCopia = desterceiriza(val, resCopia);}
+            // if(resCopia.contClientes < val.n){resCopia = desterceiriza(val, resCopia);}
             break;
         }
         if(resCopia.custoTotal < res.custoTotal){
-            cout << "Voltando para o começo" << endl;
+            // cout << "Voltando para o começo" << endl;
             res = resCopia;
             k = 1;
         }else{
-            cout << "Avançando nas estruturas" << endl;
+            // cout << "Avançando nas estruturas" << endl;
             k = k + 1;
         }
     }
