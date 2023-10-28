@@ -58,7 +58,7 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
         if (clienteAtendido[i] == false)
         {
             res.custoTerceirizacao += val.p[i];
-            res.terceirizados.push_back(i);
+            res.terceirizados.push_back(i + 1);
         }
     }
 

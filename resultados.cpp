@@ -27,7 +27,7 @@ void Resultados::mostraResultados(MeuArquivo val){
     
     // cout << endl;
     for (int elemento : terceirizados) {
-        cout << elemento + 1 << ' ';
+        cout << elemento << ' ';
     }
 
     cout << endl << endl << "Numero de rotas: " << contVeiculo << endl;
