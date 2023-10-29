@@ -25,7 +25,6 @@ void Resultados::mostraResultados(MeuArquivo val){
     cout << "Custo de terceirizacao: " << custoTerceirizacao << endl;
     cout << endl << "Lista de clientes terceirizados: ";
     
-    // cout << endl;
     for (int elemento : terceirizados) {
         cout << elemento << ' ';
     }
@@ -51,4 +50,31 @@ void Resultados::mostraResultados(MeuArquivo val){
     // }
 
     // cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
+}
+
+void Resultados::salvaResultados(string instancia){
+    ofstream arquivo(instancia);
+
+    if (arquivo.is_open()) {
+        arquivo  << custoTotal << endl;
+        arquivo  <<  custoRoteamento << endl;
+        arquivo  << custoVeiculos << endl;
+        arquivo << custoTerceirizacao << endl << endl;
+
+        for (int elemento : terceirizados) {
+            arquivo << elemento << ' ';
+        }
+
+        arquivo << endl << endl <<  contVeiculo << endl;
+        for (int i = 0; i < contVeiculo; i++) {
+            for (int j = 1; j < rota[i].size() - 1; j++) {
+                arquivo << rota[i][j] << ' ';
+            }
+            arquivo << endl;
+        }
+
+        arquivo.close();
+    } else {
+        cout << "Erro ao abrir o arquivo para escrita." << endl;
+    }
 }

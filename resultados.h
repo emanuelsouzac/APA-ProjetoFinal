@@ -14,6 +14,7 @@ public:
     ~Resultados();
 
     void mostraResultados(MeuArquivo valores);
+    void salvaResultados(string instancia);
 
     int custoTotal;
     int custoRoteamento;
