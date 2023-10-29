@@ -11,9 +11,10 @@ using namespace std;
 class Resultados {
 public:
     Resultados(MeuArquivo valores);
+    Resultados();
     ~Resultados();
 
-    void mostraResultados(MeuArquivo);
+    void mostraResultados();
     void salvaResultados(string);
 
     int custoTotal;

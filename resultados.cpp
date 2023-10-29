@@ -13,12 +13,16 @@ Resultados::Resultados(MeuArquivo val) {
     contClientes = 0;
 }
 
+Resultados::Resultados() {
+}
+
 Resultados::~Resultados() {
 
 }
 
-void Resultados::mostraResultados(MeuArquivo val){
-    cout << "Valor total da solucao: " << custoTotal << endl;
+void Resultados::mostraResultados(){
+    // cout << "Valor total da solucao: " << custoTotal << endl;
+    cout << "\033[1;31mValor total da solucao: " << custoTotal << "\033[0m" << endl;
     cout << "Custo de roteamento: " << custoRoteamento << endl;
     cout << "Custo associado a utilizacao dos veiculos: " << custoVeiculos << endl;
     cout << "Custo de terceirizacao: " << custoTerceirizacao << endl;
@@ -47,8 +51,6 @@ void Resultados::mostraResultados(MeuArquivo val){
     // for (int i = 0; i < val.k; i++) {
     //     cout << "Carro " << i + 1 << ": " << capacVeiculo[i] << endl;
     // }
-
-    // cout << endl << endl << "O total de clientes atendidos foi de " << contClientes << " de no minimo " << val.L << endl;
 }
 
 void Resultados::salvaResultados(string instancia){
