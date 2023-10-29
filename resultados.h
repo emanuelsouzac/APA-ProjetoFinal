@@ -13,8 +13,8 @@ public:
     Resultados(MeuArquivo valores);
     ~Resultados();
 
-    void mostraResultados(MeuArquivo valores);
-    void salvaResultados(string instancia);
+    void mostraResultados(MeuArquivo);
+    void salvaResultados(string);
 
     int custoTotal;
     int custoRoteamento;

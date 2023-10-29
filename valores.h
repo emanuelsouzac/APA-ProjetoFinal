@@ -9,7 +9,7 @@ using namespace std;
 
 class MeuArquivo {
 public:
-    MeuArquivo(const string& instancia);
+    MeuArquivo(const string&);
 
     int n, k, Q, L, r;
     vector<int> d, p;

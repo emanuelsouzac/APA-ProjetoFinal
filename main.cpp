@@ -14,7 +14,7 @@ int main() {
 
     auto start_time = chrono::high_resolution_clock::now();
 
-    string instancia = "n9k5_B";
+    string instancia = "n9k5_A";
 
     // cout << "Instancia: ";
     // cin >> instancia;
@@ -26,13 +26,13 @@ int main() {
 
     cout << endl << ">>>>>>>>>> Guloso <<<<<<<<<<" << endl << endl;
     resultados = guloso.algoritmoGuloso(valores, resultados);
-    // resultados.mostraResultados(valores);
+    resultados.mostraResultados(valores);
     resultados.salvaResultados("resultadosGuloso/" + instancia + ".txt");
 
-    // cout << endl << ">>>>>>>>>> VND <<<<<<<<<<" << endl << endl;
-    // resultados = vnd.algoritmoVND(valores, resultados);
-    // resultados.mostraResultados(valores);
-    // resultados.salvaResultados("resultadosVND/" + instancia + ".txt");
+    cout << endl << ">>>>>>>>>> VND <<<<<<<<<<" << endl << endl;
+    resultados = vnd.algoritmoVND(valores, resultados);
+    resultados.mostraResultados(valores);
+    resultados.salvaResultados("resultadosVND/" + instancia + ".txt");
 
     cout << endl << ">>>>>>>>>> Tempo de execucao <<<<<<<<<<" << endl << endl;
     auto end_time = chrono::high_resolution_clock::now();

@@ -17,7 +17,7 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
 
     while (1)
     {
-        menor = 100000000;
+        menor = NUM;
         for (int i = 0; i < val.n + 1; i++)
         {
             if (i != ref && i != 0 && clienteAtendido[i-1] == false && val.c[ref][i] < menor)
@@ -28,8 +28,7 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
         }
         if (res.capacVeiculo[res.contVeiculo] - val.d[pos - 1] < 0)
         {
-            res.custoRoteamento += val.c[ref][0]; // adiciona a volta para a garagem ao custo total
-            res.custoRota[res.contVeiculo] += val.c[ref][0]; // adiciona a volta para a garagem ao custo de cada rota
+            res.custoRoteamento += val.c[ref][0];
             res.rota[res.contVeiculo].push_back(0);
             res.contVeiculo++;
             if (res.contClientes >= val.L)
@@ -40,12 +39,9 @@ Resultados Guloso::algoritmoGuloso(MeuArquivo val, Resultados res) {
         }
         else
         {
-            if (res.capacVeiculo[res.contVeiculo] == val.Q) res.rota[res.contVeiculo].push_back(0); // adiciona 0 à rota se ele acabou de começar
+            if (res.capacVeiculo[res.contVeiculo] == val.Q) res.rota[res.contVeiculo].push_back(0);
             clienteAtendido[pos-1] = true;
-
-            res.custoRoteamento += val.c[ref][pos]; // custo da rota total
-            res.custoRota[res.contVeiculo] += val.c[ref][pos]; // custo de cada rota
-
+            res.custoRoteamento += val.c[ref][pos];
             res.capacVeiculo[res.contVeiculo] -= val.d[pos - 1];
             res.contClientes++;
             ref = pos;

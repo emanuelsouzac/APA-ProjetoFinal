@@ -14,7 +14,7 @@ public:
     Guloso();
     ~Guloso();
 
-    Resultados algoritmoGuloso(MeuArquivo valores, Resultados resultados);
+    Resultados algoritmoGuloso(MeuArquivo, Resultados);
 
 };
 

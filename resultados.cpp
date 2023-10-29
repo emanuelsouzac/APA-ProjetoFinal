@@ -3,7 +3,6 @@
 Resultados::Resultados(MeuArquivo val) {
     custoTotal = 0;
     custoRoteamento = 0;
-    custoRota.resize(val.k, 0);
     custoVeiculos = 0;
     custoTerceirizacao = 0;
 
