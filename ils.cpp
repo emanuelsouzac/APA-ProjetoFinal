@@ -149,16 +149,10 @@ Resultados ILS::algoritmoILS(MeuArquivo val, Resultados res){
     Resultados resCopia;
     VND vnd;
     int n = 0;
-    while(n < 1000){
-        // cout << "ILS: " << n << endl;
-        
-        // cout << endl;
+    while(n < 2000){
         resCopia = pertubacao(val, res);
         if(resCopia.contVeiculo>1){resCopia = pertubacaoEntreRotas(val, resCopia);}
-        // cout << endl;
-
         resCopia = vnd.algoritmoVND(val, resCopia);
-
         if(resCopia.custoTotal < res.custoTotal){
             res = resCopia;
             n = 0;
