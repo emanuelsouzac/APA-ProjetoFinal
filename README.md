@@ -8,43 +8,7 @@ Segundo ele, o programa está conceitualmente certo. Ele deve gerar resultados n
 
 No geral, um erro cometido foi o de fazer cópias. Ele não gosta de jeito nenhum, então sempre que possível as passagens de parâmetro devem ser por referência (caso a referência seja só para acessar valores, usar como const).
 
-Ele preza muito por organização, então fazer um código limpo é importante. É preciso se atentar em cada detalhe e revisar o código a todo momento. Ele não gosta quando se cria uma variável desnecessária quando se pode usar recursos do próprio código (por exemplo, ao invés de ter usado o contVeiculos como parada nos fors, eu poderia ter usado rota.size()), ou quando se cria uma variável um pouco difícil de entender (como foi o caso da variável ref, no guloso, ou das variáveis A, B, x e y no vnd para salvar as informações para a troca) e também quando se repete uma estrutura desnecessária, como exemplo do swap:
-
-Como fiz:
-
-int novoCusto;
-if(j == i + 1 || j == i + 2){
-    novoCusto = resCopia.custoRoteamento
-    - val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][i]]
-    - val.c[resCopia.rota[rotaN][j]][resCopia.rota[rotaN][j+1]]
-    + val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][j]]
-    + val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][j+1]];
-}else{
-    novoCusto = resCopia.custoRoteamento
-    - val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][i]]
-    - val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][i+1]]
-    - val.c[resCopia.rota[rotaN][j-1]][resCopia.rota[rotaN][j]]
-     - val.c[resCopia.rota[rotaN][j]][resCopia.rota[rotaN][j+1]]
-    + val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][j]]
-    + val.c[resCopia.rota[rotaN][j]][resCopia.rota[rotaN][i+1]]
-    + val.c[resCopia.rota[rotaN][j-1]][resCopia.rota[rotaN][i]]
-    + val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][j+1]];
-}
-
-Como poderia ter sido feito:
-
-int novoCusto = resCopia.custoRoteamento
-    - val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][i]]
-    - val.c[resCopia.rota[rotaN][j]][resCopia.rota[rotaN][j+1]]
-    + val.c[resCopia.rota[rotaN][i-1]][resCopia.rota[rotaN][j]]
-    + val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][j+1]];
-if(!(j == i + 1 || j == i + 2)){
-    novoCusto
-    - val.c[resCopia.rota[rotaN][i]][resCopia.rota[rotaN][i+1]]
-    - val.c[resCopia.rota[rotaN][j-1]][resCopia.rota[rotaN][j]]
-    + val.c[resCopia.rota[rotaN][j]][resCopia.rota[rotaN][i+1]]
-    + val.c[resCopia.rota[rotaN][j-1]][resCopia.rota[rotaN][i]];
-}
+Ele preza muito por organização, então fazer um código limpo é importante. É preciso se atentar em cada detalhe e revisar o código a todo momento. Ele não gosta quando se cria uma variável desnecessária quando se pode usar recursos do próprio código (por exemplo, ao invés de ter usado o contVeiculos como parada nos fors, eu poderia ter usado rota.size()), ou quando se cria uma variável um pouco difícil de entender (como foi o caso da variável ref, no guloso, ou das variáveis A, B, x e y no vnd para salvar as informações para a troca) e também quando se repete uma estrutura desnecessária.
 
 Uma outra coisa que ele gosta é passar o arquivo da instância como parâmetro na main. Assim, na chamada da execução do programa no terminal, passa nele qual instância você que usar. Não sei bem explicar como é isso, mas ele disse que é bem melhor e gosta quando faz.
 
